@@ -17,7 +17,6 @@ namespace AspNetChat
             this.name = this.WebSocketContext.QueryString["username"];
             if (name =="") { name = "NoName"; }
             clients.Add(this);            
-
             clients.Broadcast(string.Format("<strong><small> {0} joined. </small></strong>", name));
         }
         

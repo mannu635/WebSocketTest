@@ -9,23 +9,15 @@
 <head runat="server">
     <script type="text/javascript">
         var ws;
-
         function $(id) {
             return document.getElementById(id);
         }
 
         function wireEvents() {
-            $('send').addEventListener('click', function () {
-                var message = $('message');
-                ws.send(message.value);
-                message.value = '';
-            });
-
             $('close').addEventListener('click', function () {
                 ws.close();
             });
         }
-
         function createSpan(text) {
             var span = document.createElement('span');
             span.innerHTML = text + '<br />';
@@ -33,7 +25,7 @@
         }
 
        function connect() {
-            wireEvents();
+           wireEvents();
             var conversation = $('conversation');
             var name = $('name').value;
             var url = 'ws://localhost:10807/chat.ashx?username=' + $('name').value;
@@ -64,6 +56,11 @@
            
         };
 
+       function send() {
+           var message = $('message');
+           ws.send(message.value);
+           message.value = '';
+       }
     </script>
     <style>
        .container{
@@ -104,7 +101,7 @@
         </div>
         <div id="afterconnect" style="display:none">
             <input id="message" placeholder="Message"/>
-            <input id="send" type="button" value="Send" />
+            <input id="send" type="button" value="Send" onclick="send()"/>
             <input id="close" type="button" value="Close Connection" />
         </div>
         <br />
