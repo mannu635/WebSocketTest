@@ -24,15 +24,15 @@ namespace AspNetChat
       {
         await Task.Run(() =>
         {
-          Array.ForEach(_lngList.Split(','), x =>
-                  {
-              msgList.Add(new Message
-              {
-                ID = index++,
-                Name = x,
-                Text = x.Substring(0, 2) == "Sp" ? "es" : x.Substring(0, 2) == "Ge" ? "de" : x.Substring(0, 2).ToLower()
-              });
-            });
+          //Array.ForEach(_lngList.Split(','), x =>
+          //        {
+          //    msgList.Add(new Message
+          //    {
+          //      ID = index++,
+          //      Name = x,
+          //      Text = x.Substring(0, 2) == "Sp" ? "es" : x.Substring(0, 2) == "Ge" ? "de" : x.Substring(0, 2).ToLower()
+          //    });
+          //  });
         });
       }
       catch (Exception ex)
