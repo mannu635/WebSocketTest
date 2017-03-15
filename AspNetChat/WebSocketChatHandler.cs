@@ -26,10 +26,10 @@ namespace AspNetChat
       _storeMessages = Task.Run(() => _service.GetAll()).Result;
       foreach( var message in _storeMessages)
             {
-                clients.Broadcast(string.Format("<span style='color:grey;font-size: 9px;'>{0} : {1}</span>", message.Name, message.Text));
+                this.Send(string.Format("<span style='color:grey;font-size: 9px;'>{0} : {1}</span>", message.Name, message.Text));
             }
-
-            clients.Broadcast(string.Format("<hr/><strong><small> {0} joined. </small></strong>", name));
+            this.Send("<hr/>");
+            clients.Broadcast(string.Format("<strong><small> {0} joined. </small></strong>", name));
         }
 
     public override void OnMessage(string message)
@@ -40,8 +40,8 @@ namespace AspNetChat
 
     public override void OnClose()
     {
-      clients.Remove(this);
-      clients.Broadcast(string.Format("<small>{0} left.</small>", name));
+      clients.Remove(this); 
+      clients.Broadcast(string.Format("<small style='color:red;font-size: 9px;'>{0} left.</small>", name));
     }
   }
 }

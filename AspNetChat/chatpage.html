@@ -44,6 +44,7 @@
       ws.onmessage = function (e) {
         console.log(e);
         conversation.appendChild(createSpan(e.data.toString()));
+        conversation.scrollTop = conversation.scrollHeight;
       };
 
       ws.onclose = function () {
@@ -106,7 +107,7 @@
       <input id="close" type="button" value="Close Connection" />
     </div>
     <br />
-    <div id="conversation">
+    <div id="conversation" style="overflow-y: scroll;">
     </div>
   </div>
 
