@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading;
 using System.Web;
 using Microsoft.Web.WebSockets;
+using System.Configuration;
+using System.Data.SqlClient;
 
 namespace AspNetChat
 {
@@ -11,8 +13,8 @@ namespace AspNetChat
   {
     private static WebSocketCollection clients = new WebSocketCollection();
     private readonly MessageService _service = new MessageService();
-
-    private string name;
+        private static List<Message> _storeMessages = new List<Message>();
+        private string name;
 
     public override void OnOpen()
     {
@@ -20,7 +22,9 @@ namespace AspNetChat
       if (name == "") { name = "NoName"; }
       clients.Add(this);
       clients.Broadcast(string.Format("<strong><small> {0} joined. </small></strong>", name));
-    }
+     _storeMessages=_service.GetAll();
+      //Mickey: I need to broadcast the previous messages here
+       }
 
     public override void OnMessage(string message)
     {
