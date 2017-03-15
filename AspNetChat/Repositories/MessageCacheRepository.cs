@@ -10,7 +10,7 @@ namespace AspNetChat
 {
   public class MessageCacheRepository : IBaseRepository<Message>
   {
-    private static string _lngList = ConfigurationManager.AppSettings["langList"];
+    
     public async Task<IList<Message>> GetAll()
     {
       return await GetAllMessageAsync();

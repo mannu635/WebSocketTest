@@ -8,17 +8,18 @@ using System.Threading.Tasks;
 
 namespace Worklio.Services
 {
-    public class MessageService : IBaseRepository<Message>
+  public class MessageService : IBaseRepository<Message>
+  {
+    private readonly IBaseRepository<Message> _repository;
+    public MessageService()
     {
-        private readonly IBaseRepository<Message> _repository;
-        public MessageService()
-        {
-            this._repository = new MessageSQLRepository();
-        }
-        public Task<IList<Message>> GetAll()
-        {
-            return _repository.GetAll();
-        }
+      //this._repository = new MessageSQLRepository();
+      this._repository = new MessageCacheRepository();
+    }
+    public Task<IList<Message>> GetAll()
+    {
+      return _repository.GetAll();
+    }
 
     public bool Add(Message msg)
     {
@@ -26,9 +27,7 @@ namespace Worklio.Services
     }
 
     public void Dispose()
-        {
-        }
-
-   
+    {
+    }
   }
 }
