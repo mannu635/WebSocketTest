@@ -11,6 +11,7 @@ namespace AspNetChat
     void Remove(string key);
     object Get(string key);
     void Clear();
+    bool Contains(string key);
 
   }
   public class Cacher : ICasher
@@ -45,5 +46,10 @@ namespace AspNetChat
         return _cache.Add(key, value, DateTimeOffset.Now.AddHours(_cachetimer));
       }
     }
+    public bool Contains(string key)
+    {
+      return _cache.Contains(key);
+    }
+
   }
 }
