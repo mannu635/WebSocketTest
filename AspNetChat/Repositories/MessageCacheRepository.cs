@@ -12,21 +12,40 @@ namespace AspNetChat
   {
     private readonly Cacher _cache = new Cacher();
     private const string _keyCache = "messager_WO";
-    private static List<Message> _storeMessages = new List<Message>() ;
+    private static IList<Message> _storeMessages = new List<Message>() ;
     public async Task<IList<Message>> GetAll()
     {
       return await GetAllMessageAsync();
     }
 
-    private Task<IList<Message>> GetAllMessageAsync()
+    private async Task<IList<Message>> GetAllMessageAsync()
     {
-      throw new NotImplementedException();
+      try
+      {
+        await Task.Run(() =>
+        {
+          if(_cache.Contains(_keyCache))
+          {
+            return (IList <Message>)_cache.Get(_keyCache);
+          }
+          else
+          {
+            return _storeMessages;
+          }
+         
+        });
+      }
+      catch (Exception ex)
+      {
+        throw ex;
+      }
+      return _storeMessages;
     }
+
 
     public bool Add(Message msg)
     {
       _storeMessages.Add(msg);
-      _storeMessages.Reverse();
       _cache.Add(_keyCache, _storeMessages);
       return true;
     }
