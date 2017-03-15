@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,28 @@ namespace AspNetChat
           }
           else
           {
+            var con = ConfigurationManager.ConnectionStrings["MessengerSTR"].ToString();
+            using (SqlConnection myConnection = new SqlConnection(con))
+            {
+
+              SqlCommand command = new SqlCommand();
+              command.Connection = myConnection;
+              command.CommandText = "SELECT * FROM message order by timestamp";
+              myConnection.Open();
+              using (SqlDataReader reader = command.ExecuteReader())
+              {
+                while (reader.Read())
+                {
+                  _storeMessages.Add(new Message()
+                  {
+                    ID = reader.GetGuid(0),
+                    Name = reader["Name"].ToString(),
+                    Text = reader["Text"].ToString()
+                  });
+                }
+              }
+            }
+            _cache.Add(_keyCache, _storeMessages);
             return _storeMessages;
           }
          
