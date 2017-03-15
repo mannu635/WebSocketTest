@@ -21,6 +21,7 @@ namespace AspNetChat
     {
       this.name = this.WebSocketContext.QueryString["username"];
       if (name == "") { name = "NoName"; }
+            Console.WriteLine("{0} : Connection Opened for {1}", DateTime.Now, this.name);
       clients.Add(this);
       
       _storeMessages = Task.Run(() => _service.GetAll()).Result;
