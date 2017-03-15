@@ -20,8 +20,7 @@ namespace AspNetChat
     private async Task<IList<Message>> GetAllMessageAsync()
     {
       IList<Message> msgList = new List<Message>();
-      int index = 1;
-            try
+      try
       {
         await Task.Run(() =>
         {
