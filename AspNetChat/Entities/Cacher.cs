@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using System.Linq;
 using System.Runtime.Caching;
 
@@ -50,6 +49,5 @@ namespace AspNetChat
     {
       return _cache.Contains(key);
     }
-
   }
 }

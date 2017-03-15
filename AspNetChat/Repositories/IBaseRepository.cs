@@ -8,6 +8,5 @@ namespace AspNetChat
     {
         Task<IList<TEntity>> GetAll();
         bool Add(TEntity obj);
-
     }
 }
