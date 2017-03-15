@@ -7,6 +7,7 @@ using Microsoft.Web.WebSockets;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 
 namespace AspNetChat
 {
@@ -15,16 +16,16 @@ namespace AspNetChat
     private static WebSocketCollection clients = new WebSocketCollection();
     private readonly MessageService _service = new MessageService();
     private static IList<Message> _storeMessages;
-    private string name;
+        public static readonly Index MainLogWindow = new Index();
+        private string name;
 
     public override void OnOpen()
     {
       this.name = this.WebSocketContext.QueryString["username"];
       if (name == "") { name = "NoName"; }
-            Console.WriteLine("{0} : Connection Opened for {1}", DateTime.Now, this.name);
       clients.Add(this);
-      
-      _storeMessages = Task.Run(() => _service.GetAll()).Result;
+            MainLogWindow.UpdateTextBox(string.Format("{0} : {1} Connected", name, DateTime.Now));
+            _storeMessages = Task.Run(() => _service.GetAll()).Result;
       foreach( var message in _storeMessages)
             {
                 this.Send(string.Format("<span style='color:grey;font-size: 9px;'>{0} : {1}</span>", message.Name, message.Text));

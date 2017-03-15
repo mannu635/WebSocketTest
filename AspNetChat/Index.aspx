@@ -1,13 +1,14 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="AspNetChat.Index" %>
 
 <!DOCTYPE html>
+
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
         crossorigin="anonymous"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+
+<head>
   <script type="text/javascript">
     var ws;
     function $(id) {
@@ -25,7 +26,7 @@
       return span;
     }
 
-    function connect() {
+    function connectuser() {
       wireEvents();
       var conversation = $('conversation');
       var name = $('name').value;
@@ -58,7 +59,7 @@
 
     };
 
-    function send() {
+    function sendmsg() {
       var message = $('message');
       ws.send(message.value);
       message.value = '';
@@ -95,11 +96,19 @@
     }
     .consolebox{
         background-color:black;
-        height:100%
+        height: 500px;
+        margin-right:15px;
+        margin-top:15px;
+        padding:2px!important;
     }
     .ctitle{
         background-color:white;
+        width:100%;
         
+    }
+    h3{
+        margin-top:1px!important;
+        margin-bottom:5px!important;
     }
   </style>
 </head>
@@ -109,8 +118,9 @@
 
   <div class="container">
       <div class="col-md-4 consolebox">
-          <span class="text-center ctitle">Console</span>
-          
+          <h3 class="text-center ctitle">Console</h3>
+          <asp:Panel ID="myPanel" runat="server" ForeColor="Lime">
+            </asp:Panel>
       </div>
       <div class="col-md-4 chatbox">
     <div class="jumbotron text-center">
@@ -119,13 +129,13 @@
     <div class="text-center">
       <div id="beforeconnect" style="display:block">
         <input id="name" placeholder="Name" />
-        <input id="connect" type="button" value="Connect" onclick="connect()" />
+        <input id="connect" type="button" value="Connect" onclick="connectuser()" />
       </div>
       <div id="connected"></div>
     </div>
     <div id="afterconnect" style="display:none">
       <input id="message" placeholder="Message" />
-      <input id="send" type="button" value="Send" onclick="send()" />
+      <input id="send" type="button" value="Send" onclick="sendmsg()" />
       <input id="close" type="button" value="Close Connection" />
     </div>
     <br />

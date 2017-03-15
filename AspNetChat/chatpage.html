@@ -65,11 +65,13 @@
   <style>
     .container {
       margin-top: 10px;
-      width: 550px !important;
       border: 5px solid black;
-      padding: 2px;
+      
     }
-
+    .chatbox{
+         border: 2px solid black;
+         padding: 4px;
+    }
     #afterconnect {
       position: fixed;
       bottom: 0;
@@ -86,11 +88,39 @@
       padding: 10px;
       background-color: ghostwhite;
     }
+    .jumbotron{
+        background-color:#89d0df;
+    }
+    .consolebox{
+        background-color:black;
+        height: 500px;
+        margin-right:15px;
+        margin-top:15px;
+        padding:2px!important;
+    }
+    .ctitle{
+        background-color:white;
+        width:100%;
+        
+    }
+    h3{
+        margin-top:1px!important;
+        margin-bottom:5px!important;
+    }
   </style>
 </head>
 <body>
 
+    <form id="form1" runat="server">
+
   <div class="container">
+      <div class="col-md-4 consolebox">
+          <h3 class="text-center ctitle">Console</h3>
+          <asp:Panel ID="myPanel" runat="server" ForeColor="Lime">
+              test text
+            </asp:Panel>
+      </div>
+      <div class="col-md-4 chatbox">
     <div class="jumbotron text-center">
       <h3>WebSockets Test</h3>
     </div>
@@ -109,7 +139,12 @@
     <br />
     <div id="conversation" style="overflow-y: scroll;">
     </div>
+          </div>
+      <div class="col-md-4"></div>
   </div>
+
+
+    </form>
 
 
 </body>
