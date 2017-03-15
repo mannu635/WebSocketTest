@@ -18,19 +18,9 @@ namespace AspNetChat
       return await GetAllMessageAsync();
     }
 
-    private async Task<IList<Message>> GetAllMessageAsync()
+    private Task<IList<Message>> GetAllMessageAsync()
     {
-      IList<Message> msgList = _cache.Get(_keyCache) as IList<Message>;
-      //if (msgList != null)
-      //{
-      //  return Task.FromResult(msgList);
-      //}
-      //else
-      //{
-      //  var cnt = Task.Run(() => GetAll().Result);
-      //  _cache.Add("contries", cnt.Result);
-        return null;
-           
+      throw new NotImplementedException();
     }
 
     public bool Add(Message msg)
@@ -40,7 +30,6 @@ namespace AspNetChat
       _cache.Add(_keyCache, _storeMessages);
       return true;
     }
-
 
     public void Dispose()
     {
