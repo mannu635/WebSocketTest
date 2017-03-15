@@ -44,7 +44,8 @@ namespace AspNetChat
 
     public bool Add(Message obj)
     {
-      throw new NotImplementedException();
+
+      return true;
     }
 
 

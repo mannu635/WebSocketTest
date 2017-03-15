@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Worklio.Services
+namespace AspNetChat
 {
   public class MessageService : IBaseRepository<Message>
   {

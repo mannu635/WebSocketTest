@@ -6,10 +6,17 @@ using System.Threading.Tasks;
 
 namespace AspNetChat
 {
-    public class Message 
+  public class Message
+  {
+    public Guid ID { get; set; }
+    public string Name { get; set; }
+    public string Text { get; set; }
+
+    public Message(string name, string text)
     {
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public string Text { get; set; }
+      ID = Guid.NewGuid();
+      Name = name;
+      Text = text;
     }
+  }
 }
