@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AspNetChat
 {
-  public class MessageRepository : IBaseRepository<Message>
+  public class MessageCacheRepository : IBaseRepository<Message>
   {
     private static string _lngList = ConfigurationManager.AppSettings["langList"];
     public async Task<IList<Message>> GetAll()

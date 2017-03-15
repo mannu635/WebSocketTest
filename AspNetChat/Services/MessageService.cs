@@ -13,16 +13,16 @@ namespace Worklio.Services
         private readonly IBaseRepository<Message> _repository;
         public MessageService()
         {
-            this._repository = new MessageRepository();
+            this._repository = new MessageSQLRepository();
         }
         public Task<IList<Message>> GetAll()
         {
             return _repository.GetAll();
         }
 
-    public bool Add(Message obj)
+    public bool Add(Message msg)
     {
-      throw new NotImplementedException();
+      return _repository.Add(msg);
     }
 
     public void Dispose()
