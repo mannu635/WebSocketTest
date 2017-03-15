@@ -13,8 +13,8 @@ namespace AspNetChat
     private readonly IBaseRepository<Message> _repository;
     public MessageService()
     {
-      //this._repository = new MessageSQLRepository();
-      this._repository = new MessageCacheRepository();
+      this._repository = new MessageSQLRepository();
+      //this._repository = new MessageCacheRepository();
     }
     public Task<IList<Message>> GetAll()
     {
