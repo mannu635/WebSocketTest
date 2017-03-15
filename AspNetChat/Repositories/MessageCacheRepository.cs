@@ -10,7 +10,9 @@ namespace AspNetChat
 {
   public class MessageCacheRepository : IBaseRepository<Message>
   {
-    
+    private readonly Cacher _cache = new Cacher();
+    private const string _keyCache = "messager_WO";
+    private static List<Message> _storeMessages = new List<Message>() ;
     public async Task<IList<Message>> GetAll()
     {
       return await GetAllMessageAsync();
@@ -18,33 +20,24 @@ namespace AspNetChat
 
     private async Task<IList<Message>> GetAllMessageAsync()
     {
-      IList<Message> msgList = new List<Message>();
-      int index = 1;
-      try
-      {
-        await Task.Run(() =>
-        {
-          //Array.ForEach(_lngList.Split(','), x =>
-          //        {
-          //    msgList.Add(new Message
-          //    {
-          //      ID = index++,
-          //      Name = x,
-          //      Text = x.Substring(0, 2) == "Sp" ? "es" : x.Substring(0, 2) == "Ge" ? "de" : x.Substring(0, 2).ToLower()
-          //    });
-          //  });
-        });
-      }
-      catch (Exception ex)
-      {
-        throw ex;
-      }
-      return msgList;
+      IList<Message> msgList = _cache.Get(_keyCache) as IList<Message>;
+      //if (msgList != null)
+      //{
+      //  return Task.FromResult(msgList);
+      //}
+      //else
+      //{
+      //  var cnt = Task.Run(() => GetAll().Result);
+      //  _cache.Add("contries", cnt.Result);
+        return null;
+           
     }
 
-    public bool Add(Message obj)
+    public bool Add(Message msg)
     {
-
+      _storeMessages.Add(msg);
+      _storeMessages.Reverse();
+      _cache.Add(_keyCache, _storeMessages);
       return true;
     }
 
