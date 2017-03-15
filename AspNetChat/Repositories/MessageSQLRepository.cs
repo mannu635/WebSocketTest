@@ -30,7 +30,7 @@ namespace AspNetChat
 
                 SqlCommand command = new SqlCommand();
                 command.Connection = myConnection;
-                command.CommandText = "Select * from Message";
+                command.CommandText = "SELECT * FROM message order by timestamp";
                 myConnection.Open();
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -56,10 +56,27 @@ namespace AspNetChat
 
     public bool Add(Message obj)
     {
-      throw new NotImplementedException();
+            var con = ConfigurationManager.ConnectionStrings["MessengerSTR"].ToString();
+            using (SqlConnection myConnection = new SqlConnection(con))
+            {
+
+                SqlCommand command = new SqlCommand();
+                command.Connection = myConnection;
+                command.CommandText = "Insert into message(id,name,text,timestamp) values(@id,@name, @text,@timestamp)";
+                command.Parameters.AddWithValue("@id", obj.ID);
+                command.Parameters.AddWithValue("@name", obj.Name);
+                command.Parameters.AddWithValue("@text", obj.Text);
+                command.Parameters.AddWithValue("@timestamp", DateTime.Now);
+                myConnection.Open();
+                int result = command.ExecuteNonQuery();
+                myConnection.Close();
+                if (result < 1)
+                {
+                 return false;
+                }
+            }
+            return true;
     }
-
-
     public void Dispose()
     {
       throw new NotImplementedException();

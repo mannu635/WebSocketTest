@@ -22,10 +22,15 @@ namespace AspNetChat
       this.name = this.WebSocketContext.QueryString["username"];
       if (name == "") { name = "NoName"; }
       clients.Add(this);
-      clients.Broadcast(string.Format("<strong><small> {0} joined. </small></strong>", name));
+      
       _storeMessages = Task.Run(() => _service.GetAll()).Result;
-      //Mickey: I need to broadcast the previous messages here
-    }
+      foreach( var message in _storeMessages)
+            {
+                clients.Broadcast(string.Format("<span style='color:grey;font-size: 9px;'>{0} : {1}</span>", message.Name, message.Text));
+            }
+
+            clients.Broadcast(string.Format("<hr/><strong><small> {0} joined. </small></strong>", name));
+        }
 
     public override void OnMessage(string message)
     {
