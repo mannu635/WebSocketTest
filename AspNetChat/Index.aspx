@@ -164,7 +164,7 @@
             Click the button below to switch between Save/Access to SQL and Save/Access to Cache.
           </div>
           <strong>Current Configuration: </strong><asp:Label runat="server" ID="lbl" Text="Cache"></asp:Label>
-         <asp:Button id="switchsrc" runat="server" CssClass="btn-block btn-primary" Text="Switch" OnClick="switchsrc_Click"  TabIndex="5"/>
+         <asp:Button id="switchsrc" runat="server" CssClass="btn-block btn-primary" Text="Switch" OnClick="switchsrc_Click"  TabIndex="5" UseSubmitBehavior="False"/>
       </div>
   </div>
 
