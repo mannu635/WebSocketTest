@@ -160,12 +160,13 @@
     </div>
      </div>
       <div class="col-sm-4" style="text-align: center; padding-top:50px;">
+         
           <div class="panel-body">
             Click the button below to switch between Save/Access to SQL and Save/Access to Cache.
           </div>
           <strong>Current Configuration: </strong><asp:Label runat="server" ID="lbl" Text="Cache"></asp:Label>
-         <asp:Button id="switchsrc" runat="server" CssClass="btn-block btn-primary" Text="Switch" OnClick="switchsrc_Click"  TabIndex="5" UseSubmitBehavior="False"/>
-      </div>
+         <asp:Button id="switchsrc" runat="server" CssClass="btn-block btn-primary" Text="Switch" OnClick="switchsrc_Click"  TabIndex="5" UseSubmitBehavior="False" AutoPostback = false/>
+        </div>
   </div>
 
 
