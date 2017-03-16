@@ -11,26 +11,30 @@ namespace AspNetChat
 {
     public partial class Index : System.Web.UI.Page
     {
+        protected static string provider;
         protected void Page_Load(object sender, EventArgs e)
         {
+            
         }
 
         protected void switchsrc_Click(object sender, EventArgs e)
-        {
-            var config = WebConfigurationManager.OpenWebConfiguration("~");
 
-            if (ConfigurationManager.AppSettings["provider"] == "sql")
+        {
+            if(lbl.Text=="Cache")
             {
-                config.AppSettings.Settings["provider"].Value = "Cache";
-                lbl.Text = "Cache";
+                provid = "sql";
+                lbl.Text = "SQL";
             }
             else
             {
-                config.AppSettings.Settings["provider"].Value = "sql";
-                lbl.Text = "SQL";
+                provid = "cache";
+                lbl.Text = "Cache";
             }
-            config.Save(ConfigurationSaveMode.Modified, true);
-            ConfigurationManager.RefreshSection("appSettings");
+        }
+        public string provid
+        {
+            get { return provider; }
+            set { provider = value; }
         }
     }
 }

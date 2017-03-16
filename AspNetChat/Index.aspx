@@ -35,8 +35,8 @@
       wireEvents();
       var conversation = $('conversation'); 
       var name = $('name').value;
-        var url = 'ws://workliowebsocket.azurewebsites.net/chat.ashx?username=' + $('name').value;
-      //var url = 'ws://localhost:10807/chat.ashx?username=' + $('name').value;
+        //var url = 'ws://workliowebsocket.azurewebsites.net/chat.ashx?username=' + $('name').value;
+      var url = 'ws://localhost:10807/chat.ashx?username=' + $('name').value;
       ws = new WebSocket(url);
 
       ws.onerror = function (e) {
