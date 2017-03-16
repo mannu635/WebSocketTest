@@ -56,7 +56,8 @@
           var data = e.data.toString();
 
           if (data.charAt(0) == '~') {
-              consolelog(data.substr(1,data.length));
+              consolelog(data.substr(1, data.length));
+              consolelog.scrollTop = consolelog.scrollHeight;
           }
           else {
               conversation.appendChild(createSpan(data));
@@ -114,6 +115,7 @@
         height: 500px;
         border:5px solid white;
         padding:5px!important;
+        
     }
     .ctitle{
         background-color:white;
@@ -133,7 +135,7 @@
   <div class="container">
       <div class="col-sm-4 consolebox">
           <h3 class="text-center ctitle"> Console</h3>
-          <div id="myPanel" style="color:Lime;" runat="server">                
+          <div id="myPanel" style="color:Lime;  overflow-y: scroll; height: 450px;"  runat="server">                
             </div>
           
       </div> 
