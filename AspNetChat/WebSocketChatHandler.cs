@@ -25,7 +25,7 @@ namespace AspNetChat
       
       _storeMessages = Task.Run(() => _service.GetAll()).Result;
             this.Send("<span style='color:grey;font-size: 15px;'>Welcome to CIMP Messenger</span>");
-      foreach( var message in _storeMessages)
+            foreach( var message in _storeMessages)
             {
                 this.Send(string.Format("<span style='color:grey;font-size: 9px;'>{0} : {1}</span>", message.Name, message.Text));
             }
@@ -34,6 +34,7 @@ namespace AspNetChat
             stopWatch.Stop();
             sendtimestamp(string.Format("Open connection, Read & Send '{0}': <small>{1}ms</small>",this.name, stopWatch.Elapsed.TotalMilliseconds));
             stopWatch.Reset();
+            
         }
 
         public override void OnMessage(string message)
