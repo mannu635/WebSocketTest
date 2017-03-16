@@ -10,19 +10,19 @@ namespace AspNetChat
   public class MessageService : IBaseRepository<Message>
   {
     private readonly IBaseRepository<Message> _repository;
-        Index obj = new Index();
+    Index obj = new Index();
     public MessageService()
     {
-           if(obj.provid == "sql")
-                {
-                    this._repository = new MessageSQLRepository();
-                }
-                else
-                {
-                    this._repository = new MessageCacheRepository();
-                }
-            }
-            
+      if (obj.provid == "sql")
+      {
+        this._repository = new MessageSQLRepository();
+      }
+      else
+      {
+        this._repository = new MessageCacheRepository();
+      }
+    }
+
     public Task<IList<Message>> GetAll()
     {
       return _repository.GetAll();
