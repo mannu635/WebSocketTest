@@ -32,7 +32,7 @@ namespace AspNetChat
             this.Send("<hr/>");
             clients.Broadcast(string.Format("<strong><small> {0} joined. </small></strong>", name));
             stopWatch.Stop();
-            sendtimestamp(string.Format("Open connection, Read & Send '{0}': <small>{1}ms</small>",this.name, stopWatch.ElapsedMilliseconds));
+            sendtimestamp(string.Format("Open connection, Read & Send '{0}': <small>{1}ms</small>",this.name, stopWatch.Elapsed.TotalMilliseconds));
             stopWatch.Reset();
         }
 
@@ -42,7 +42,7 @@ namespace AspNetChat
             clients.Broadcast(string.Format("{0} : {1}", name, message));
             _service.Add(new Message(name, message));
             stopWatch.Stop();
-            sendtimestamp(string.Format("Receive and Save Msg '{0}': <small>{1}ms</small>", this.name, stopWatch.ElapsedMilliseconds));
+            sendtimestamp(string.Format("Receive and Save Msg '{0}': <small>{1}ms</small>", this.name, stopWatch.Elapsed.TotalMilliseconds));
             stopWatch.Reset();
         }
 
