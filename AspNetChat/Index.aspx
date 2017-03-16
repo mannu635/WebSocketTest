@@ -82,6 +82,7 @@
     .container {
       margin-top: 10px;
       border: 5px solid black;
+      padding:0px!important;
       
     }
     .chatbox{
@@ -110,9 +111,8 @@
     .consolebox{
         background-color:black;
         height: 500px;
-        margin-right:15px;
-        margin-top:15px;
-        padding:2px!important;
+        border:5px solid white;
+        padding:5px!important;
     }
     .ctitle{
         background-color:white;
@@ -130,12 +130,15 @@
     <form id="form1" runat="server">
 
   <div class="container">
-      <div class="col-md-4 consolebox">
+      <div class="col-sm-4 consolebox">
           <h3 class="text-center ctitle"> Console</h3>
           <div id="myPanel" style="color:Lime;" runat="server">                
-</div>
+            </div>
+          
       </div> 
-      <div class="col-md-4 chatbox">
+     
+
+      <div class="col-sm-4 chatbox">
     <div class="jumbotron text-center">
       <h3>WebSockets Test</h3>
     </div>
@@ -154,8 +157,14 @@
     <br />
     <div id="conversation" style="overflow-y: scroll;">
     </div>
+     </div>
+      <div class="col-sm-4" style="text-align: center; padding-top:50px;">
+          <div class="panel-body">
+            Click the button below to switch between Save/Access to SQL and Save/Access to Cache.
           </div>
-      <div class="col-md-4"></div>
+          <strong>Current Configuration: </strong><asp:Label runat="server" ID="lbl" Text="Cache"></asp:Label>
+         <asp:Button id="switchsrc" runat="server" CssClass="btn-block btn-primary" Text="Switch" OnClick="switchsrc_Click"/>
+      </div>
   </div>
 
 
