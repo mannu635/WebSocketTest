@@ -14,7 +14,12 @@
     function $(id) {
       return document.getElementById(id);
     }
+    function consolelog(string) {
+        var consolelog = $('myPanel');
+        consolelog.appendChild(createSpan(string));
+        consolelog.scrollTop = conversation.scrollHeight;
 
+    }
     function wireEvents() {
       $('close').addEventListener('click', function () {
         ws.close();
@@ -30,7 +35,8 @@
       wireEvents();
       var conversation = $('conversation'); 
       var name = $('name').value;
-      var url = 'ws://workliowebsocket.azurewebsites.net/chat.ashx?username=' + $('name').value;
+        var url = 'ws://workliowebsocket.azurewebsites.net/chat.ashx?username=' + $('name').value;
+      //var url = 'ws://localhost:10807/chat.ashx?username=' + $('name').value;
       ws = new WebSocket(url);
 
       ws.onerror = function (e) {
@@ -45,9 +51,16 @@
       };
 
       ws.onmessage = function (e) {
-        console.log(e);
-        conversation.appendChild(createSpan(e.data.toString()));
-        conversation.scrollTop = conversation.scrollHeight;
+          
+          var data = e.data.toString();
+
+          if (data.charAt(0) == '~') {
+              consolelog(data.substr(1,data.length));
+          }
+          else {
+              conversation.appendChild(createSpan(data));
+              conversation.scrollTop = conversation.scrollHeight;
+          }
       };
 
       ws.onclose = function () {
@@ -118,9 +131,9 @@
 
   <div class="container">
       <div class="col-md-4 consolebox">
-          <h3 class="text-center ctitle">Console</h3>
-          <asp:Panel ID="myPanel" runat="server" ForeColor="Lime">
-            </asp:Panel>
+          <h3 class="text-center ctitle"> Console</h3>
+          <div id="myPanel" style="color:Lime;" runat="server">                
+</div>
       </div> 
       <div class="col-md-4 chatbox">
     <div class="jumbotron text-center">
@@ -128,13 +141,13 @@
     </div>
     <div class="text-center">
       <div id="beforeconnect" style="display:block">
-        <input id="name" placeholder="Name" />
+        <input id="name" placeholder="Name" onkeypress="if (event.keyCode==13) {connectuser()}"/>
         <input id="connect" type="button" value="Connect" onclick="connectuser()" />
       </div>
       <div id="connected"></div>
     </div>
     <div id="afterconnect" style="display:none">
-      <input id="message" placeholder="Message" />
+      <input id="message" placeholder="Message" onkeypress="if (event.keyCode==13){ sendmsg()}"/>
       <input id="send" type="button" value="Send" onclick="sendmsg()" />
       <input id="close" type="button" value="Close Connection" />
     </div>

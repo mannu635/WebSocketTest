@@ -1,11 +1,14 @@
-﻿<!DOCTYPE html>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="AspNetChat.Index" %>
+
+<!DOCTYPE html>
+
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
         crossorigin="anonymous"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+
+<head>
   <script type="text/javascript">
     var ws;
     function $(id) {
@@ -23,7 +26,7 @@
       return span;
     }
 
-    function connect() {
+    function connectuser() {
       wireEvents();
       var conversation = $('conversation');
       var name = $('name').value;
@@ -56,7 +59,7 @@
 
     };
 
-    function send() {
+    function sendmsg() {
       var message = $('message');
       ws.send(message.value);
       message.value = '';
@@ -117,9 +120,8 @@
       <div class="col-md-4 consolebox">
           <h3 class="text-center ctitle">Console</h3>
           <asp:Panel ID="myPanel" runat="server" ForeColor="Lime">
-              test text
             </asp:Panel>
-      </div>
+      </div> 
       <div class="col-md-4 chatbox">
     <div class="jumbotron text-center">
       <h3>WebSockets Test</h3>
@@ -127,13 +129,13 @@
     <div class="text-center">
       <div id="beforeconnect" style="display:block">
         <input id="name" placeholder="Name" />
-        <input id="connect" type="button" value="Connect" onclick="connect()" />
+        <input id="connect" type="button" value="Connect" onclick="connectuser()" />
       </div>
       <div id="connected"></div>
     </div>
     <div id="afterconnect" style="display:none">
       <input id="message" placeholder="Message" />
-      <input id="send" type="button" value="Send" onclick="send()" />
+      <input id="send" type="button" value="Send" onclick="sendmsg()" />
       <input id="close" type="button" value="Close Connection" />
     </div>
     <br />
