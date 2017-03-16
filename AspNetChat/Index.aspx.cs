@@ -12,21 +12,12 @@ namespace AspNetChat
   
         protected void Page_Load(object sender, EventArgs e)
         {
-            var watch = System.Diagnostics.Stopwatch.StartNew();
-            watch.Stop();
-            var elapsedMs = watch.ElapsedMilliseconds;
+            
         }
         private delegate void NameCallBack(string varText);
-        public void UpdateTextBox(string input)
+        public string console
         {
-            if (InvokeRequired)
-            {
-                textBox.BeginInvoke(new NameCallBack(UpdateTextBox), new object[] { input });
-            }
-            else
-            {
-                myPanel.Controls.Add(new LiteralControl(input));
+            set { myPanel.Controls.Add(new LiteralControl(value)); }
         }
-
     }
 }

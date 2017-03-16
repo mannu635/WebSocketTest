@@ -16,7 +16,7 @@ namespace AspNetChat
     private static WebSocketCollection clients = new WebSocketCollection();
     private readonly MessageService _service = new MessageService();
     private static IList<Message> _storeMessages;
-        public static readonly Index MainLogWindow = new Index();
+   public  Index MainLogWindow = new Index();
         private string name;
 
     public override void OnOpen()
@@ -24,7 +24,7 @@ namespace AspNetChat
       this.name = this.WebSocketContext.QueryString["username"];
       if (name == "") { name = "NoName"; }
       clients.Add(this);
-            MainLogWindow.UpdateTextBox(string.Format("{0} : {1} Connected", name, DateTime.Now));
+            //MainLogWindow.console=string.Format("{0} : {1} Connected", name, DateTime.Now);
             _storeMessages = Task.Run(() => _service.GetAll()).Result;
       foreach( var message in _storeMessages)
             {

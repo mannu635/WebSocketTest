@@ -121,7 +121,7 @@
           <h3 class="text-center ctitle">Console</h3>
           <asp:Panel ID="myPanel" runat="server" ForeColor="Lime">
             </asp:Panel>
-      </div>
+      </div> 
       <div class="col-md-4 chatbox">
     <div class="jumbotron text-center">
       <h3>WebSockets Test</h3>
