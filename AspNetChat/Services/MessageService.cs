@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 
@@ -9,8 +11,15 @@ namespace AspNetChat
     private readonly IBaseRepository<Message> _repository;
     public MessageService()
     {
-      //this._repository = new MessageSQLRepository();
-      this._repository = new MessageCacheRepository();
+            if (ConfigurationManager.AppSettings["provider"] == "sql")
+            {
+                this._repository = new MessageSQLRepository();
+            }
+
+            else
+            {
+                this._repository = new MessageCacheRepository();
+            }
     }
     public Task<IList<Message>> GetAll()
     {
