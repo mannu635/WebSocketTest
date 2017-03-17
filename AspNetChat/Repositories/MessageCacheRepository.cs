@@ -29,6 +29,7 @@ namespace AspNetChat
           }
           else
           {
+            _storeMessages.Clear();
             var con = ConfigurationManager.ConnectionStrings["MessengerSTR"].ToString();
             using (SqlConnection myConnection = new SqlConnection(con))
             {
