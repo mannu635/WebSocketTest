@@ -17,7 +17,7 @@ namespace AspNetChat
   {
     private static readonly object _syncObject = new object();
     private MemoryCache _cache { get; } = MemoryCache.Default;
-    private static int _cachetimer = 6;
+    private static int _cachetimer = 1;
     private CacheItemPolicy _defaultPolicy { get; } = new CacheItemPolicy();
 
     public void Clear()

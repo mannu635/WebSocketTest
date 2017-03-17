@@ -7,7 +7,7 @@ using System.Web;
 
 namespace AspNetChat
 {
-  public class MessageService : IBaseRepository<Message>
+  public class MessageService 
   {
     private readonly IBaseRepository<Message> _repository;
     Index obj = new Index();
